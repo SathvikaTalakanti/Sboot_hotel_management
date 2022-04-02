@@ -1,0 +1,45 @@
+<!Doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Customer List</title>
+</head>
+<body>
+<div class="container">
+    <hr>
+    <h3> Customer List</h3>
+    <hr>
+    <a th:href="@{/customers/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Add Customer </a>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th style="text-align:center">Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="theCustomer : ${hotelCustomers}">
+            <td th:text="${theCustomer.firstName}"/>
+            <td th:text="${theCustomer.lastName}"/>
+            <td th:text="${theCustomer.email}"/>
+            <td style="text-align:center"><a th:href="@{/customers/showFormForUpdate(customerId=${theCustomer.customerId})}" class="btn btn-info btn-sm"> Update</a>&nbsp;
+                <a th:href="@{/customers/deleteById(customerId=${theCustomer.customerId})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you wanna delete the customer?'))) return false">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a th:href="@{/hotels/showAll}" class="btn btn-danger btn-sm">Go Back to Hotels</a>
+</div>
+
+</body>
+</html>
