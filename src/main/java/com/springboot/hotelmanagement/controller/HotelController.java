@@ -17,41 +17,44 @@ public class HotelController {
 
     private HotelService hotelService;
 
+    private static int hotelIdtoCustomer;
+
     @Autowired
-    public HotelController(HotelService theHotelService){
-        hotelService=theHotelService;
+    public HotelController(HotelService theHotelService) {
+        hotelService = theHotelService;
     }
 
     @GetMapping("/showAll")
-    public String findAll(Model theModel){
-        List<Hotel> Hotels=hotelService.findAll();
-        theModel.addAttribute("hotels",Hotels);
+    public String findAll(Model theModel) {
+        List<Hotel> Hotels = hotelService.findAll();
+        theModel.addAttribute("hotels", Hotels);
         return "hotels/showHotels";
     }
 
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel){
-        Hotel theHotel= new Hotel();
-        theModel.addAttribute("hotel",theHotel);
+    public String showFormForAdd(Model theModel) {
+        Hotel theHotel = new Hotel();
+        theModel.addAttribute("hotel", theHotel);
         return "hotels/hotel-form";
     }
 
     @PostMapping("/save")
-    public String saveHotel(@ModelAttribute("hotel") Hotel theHotel){
+    public String saveHotel(@ModelAttribute("hotel") Hotel theHotel) {
         hotelService.save(theHotel);
         return "redirect:/hotels/showAll";
     }
 
     @GetMapping("/showFormForUpdate")
-    public String updateHotel(@RequestParam("hotelId") int theId, Model theModel){
-        Hotel theHotel= hotelService.findById(theId);
+    public String updateHotel(@RequestParam("hotelId") int theId, Model theModel) {
+        Hotel theHotel = hotelService.findById(theId);
         theModel.addAttribute(theHotel);
         return "hotels/hotel-form";
     }
 
     @GetMapping("/deleteById")
-    public String deleteHotel(@RequestParam("hotelId") int theId){
+    public String deleteHotel(@RequestParam("hotelId") int theId) {
         hotelService.deleteById(theId);
         return "redirect:/hotels/showAll";
     }
+
 }

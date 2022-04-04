@@ -11,6 +11,9 @@ public class Room {
     @Column(name="room_id")
     private Integer roomId;
 
+    @Column(name="room_no")
+    private Integer roomNo;
+
     @Column(name="floor_no")
     private Integer floorNo;
 
@@ -40,6 +43,14 @@ public class Room {
         this.floorNo = floorNo;
     }
 
+    public Integer getRoomNo() {
+        return roomNo;
+    }
+
+    public void setRoomNo(Integer roomNo) {
+        this.roomNo = roomNo;
+    }
+
     public Hotel getHotel() {
         return hotel;
     }
@@ -52,7 +63,9 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "roomId=" + roomId +
+                ", roomNo=" + roomNo +
                 ", floorNo=" + floorNo +
+                ", hotel=" + hotel +
                 '}';
     }
 }

@@ -15,7 +15,7 @@
     <hr>
     <h3>Rooms List</h3>
     <hr>
-    <a th:href="@{/rooms/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Add Room </a>
+    <a th:href="@{/rooms/showFormForAdd/{Id}(Id=${hotelId})}" class="btn btn-primary btn-sm mb-3"> Add Room </a>
     <hr>
     <table class="table table-bordered table-striped" >
         <thead class="thead-dark">
@@ -25,11 +25,11 @@
         </thead>
         <tbody>
         <tr th:each="theRoom: ${hotelRooms}">
-            <td th:text="${theRoom.roomId}"/>
+            <td th:text="${theRoom.roomNo}"/>
             <td th:text="${theRoom.floorNo}"/>
             <td style="text-align:center">
-                <a th:href="@{/rooms/showFormForUpdate(roomId=${theRoom.roomId})}" class="btn btn-info btn-sm">Update</a>&nbsp;
-                <a th:href="@{/rooms/deleteById(roomId=${theRoom.roomId})}" class="btn btn-danger btn-sm"
+                <a th:href="@{/rooms/showFormForUpdate(roomId=${theRoom.roomId},hotelId=${hotelId})}" class="btn btn-info btn-sm">Update</a>&nbsp;
+                <a th:href="@{/rooms/deleteById(roomId=${theRoom.roomId},hotelId=${hotelId})}" class="btn btn-danger btn-sm"
                    onclick="if(!(confirm('Are you sure you wanna delete this room?'))) return false">Delete</a>
             </td>
         </tr>

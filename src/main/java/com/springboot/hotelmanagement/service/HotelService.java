@@ -1,6 +1,5 @@
 package com.springboot.hotelmanagement.service;
 
-
 import com.springboot.hotelmanagement.entity.Hotel;
 
 import java.util.List;

@@ -15,17 +15,17 @@
     <hr>
     <h3>Add Room</h3>
     <hr>
-    <form action="#" th:action="@{/rooms/save}"  th:object="${room}" method="POST">
+    <form action="#" th:action="@{/rooms/save/{Id}(Id=${hotelId})}"  th:object="${room}" method="POST">
 
         <input type="hidden" th:field="*{roomId}"/>
 
-        <input type="text" th:field="*{roomId}" class="form-control mb-4 col-4" style="display:inline" placeholder="Room No"/><br>
+        <input type="text" th:field="*{roomNo}" class="form-control mb-4 col-4" style="display:inline" placeholder="Room No"/><br>
         <input type="text" th:field="*{floorNo}" class="form-control mb-4 col-4" style="display:inline"  placeholder="Floor No"/><br>
 
         <button type="submit" class="btn btn-info col-2">Save Room</button>
     </form>
     <hr>
-    <a th:href="@{/rooms/showAll}" class="btn btn-danger btn-sm">Go Back to Rooms</a>
+    <a th:href="@{/rooms/findRooms(hotelId=${hotelId})}" class="btn btn-danger btn-sm">Go Back to Rooms</a>
 </div>
 </body>
 </html>
