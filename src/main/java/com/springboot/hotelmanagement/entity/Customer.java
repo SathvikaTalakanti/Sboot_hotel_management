@@ -27,7 +27,7 @@ public class Customer {
     private String lastName;
 
     @NotEmpty(message = "Email can not be empty!!")
-    @Pattern(regexp="^[a-z0-9]{5,}@gmail.com$", message="not a valid email")
+   // @Pattern(regexp="^[a-z0-9]{5,}@gmail.com$", message="not a valid email")
     @Column(name="email")
     private String email;
 
