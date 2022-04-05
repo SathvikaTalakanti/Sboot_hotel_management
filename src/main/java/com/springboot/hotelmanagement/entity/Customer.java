@@ -1,5 +1,10 @@
 package com.springboot.hotelmanagement.entity;
 
+
+import lombok.Data;
+
+import javax.validation.constraints.*;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,12 +16,18 @@ public class Customer {
     @Column(name="customer_id")
     private int customerId;
 
+    @NotEmpty(message = "FirstName can not be empty!!")
+    @NotNull(message = "FirstName should not be null")
     @Column(name="first_name")
     private String firstName;
 
+    @NotEmpty(message = "LastName can not be empty!!")
+    @NotNull(message = "LastName should not be null")
     @Column(name="last_name")
     private String lastName;
 
+    @NotEmpty(message = "Email can not be empty!!")
+    @Pattern(regexp="^[a-z0-9]{5,}@gmail.com$", message="not a valid email")
     @Column(name="email")
     private String email;
 

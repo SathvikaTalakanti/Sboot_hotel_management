@@ -1,5 +1,6 @@
 package com.springboot.hotelmanagement.service;
 
+import com.springboot.hotelmanagement.dto.HotelDto;
 import com.springboot.hotelmanagement.entity.Hotel;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface HotelService{
     public void save(Hotel theHotel);
 
     public void deleteById(int theId);
+
+    List<HotelDto> getAllHotels();
 }

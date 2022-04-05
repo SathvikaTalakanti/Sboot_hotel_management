@@ -1,6 +1,8 @@
 package com.springboot.hotelmanagement.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -12,12 +14,17 @@ public class Hotel {
     @Column(name="hotel_id")
     private int hotelId;
 
+    @NotEmpty(message = "Hotel Name can not be empty!!")
+    @NotNull(message = "Hotel Name should not be null")
     @Column(name="hotel_name")
     private String hotelName;
 
+    @NotEmpty(message = "Hotel Address can not be empty!!")
+    @NotNull(message = "Hotel Address should not be null")
     @Column(name="hotel_address")
     private String hotelAddress;
 
+    @NotNull(message = "Hotel Rating should not be null")
     @Column(name="hotel_rating")
     private Double hotelRating;
 

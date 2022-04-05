@@ -1,24 +1,25 @@
 package com.springboot.hotelmanagement.service;
 
+import com.springboot.hotelmanagement.dto.HotelDto;
 import com.springboot.hotelmanagement.entity.Hotel;
 import com.springboot.hotelmanagement.repository.HotelRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class HotelServiceImpl implements HotelService{
 
+    @Autowired
     private HotelRepository hotelRepository;
 
     @Autowired
-    public HotelServiceImpl(HotelRepository theHotelRepository){
-        hotelRepository=theHotelRepository;
-    }
-
+    private ModelMapper modelMapper;
 
     @Override
     @Transactional
@@ -51,4 +52,18 @@ public class HotelServiceImpl implements HotelService{
     public void deleteById(int theId) {
         hotelRepository.deleteById(theId);
     }
+
+    public List<HotelDto> getAllHotels(){
+        return hotelRepository.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private HotelDto convertEntityToDto(Hotel hotel){
+        HotelDto hotelDto=new HotelDto();
+        hotelDto=modelMapper.map(hotel, HotelDto.class);
+        return hotelDto;
+    }
+
 }

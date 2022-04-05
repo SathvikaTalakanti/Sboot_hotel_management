@@ -7,24 +7,26 @@ import com.springboot.hotelmanagement.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("/rooms")
 public class RoomController {
+
+    @Autowired
     private RoomService roomService;
 
     @Autowired
     public HotelService hotelService;
 
-    @Autowired
-    public RoomController(RoomService theRoomService){
-        roomService=theRoomService;
-    }
+    String roomForm= "rooms/room-form";
+
 
     @GetMapping("showAll")
     public String findAll(Model theModel){
@@ -38,15 +40,19 @@ public class RoomController {
         Room theRoom= new Room();
         theModel.addAttribute("room",theRoom);
         theModel.addAttribute("hotelId",Id);
-        return "rooms/room-form";
+        return roomForm;
     }
 
     @PostMapping("/save/{Id}")
-    public String saveRoom(@ModelAttribute("room") Room theRoom,@PathVariable int Id){
-        Hotel theHotel= hotelService.findById(Id);
-        theRoom.setHotel(theHotel);
-        roomService.save(theRoom);
-        return "redirect:/rooms/findRooms?hotelId="+Id;
+    public String saveRoom(@Valid @ModelAttribute("room") Room theRoom, BindingResult result, @PathVariable int Id){
+        if(result.hasErrors()){
+            return roomForm;
+        }else {
+            Hotel theHotel = hotelService.findById(Id);
+            theRoom.setHotel(theHotel);
+            roomService.save(theRoom);
+            return "redirect:/rooms/findRooms?hotelId=" + Id;
+        }
     }
 
     @GetMapping("/showFormForUpdate")
@@ -54,11 +60,11 @@ public class RoomController {
         Room theRoom = roomService.findById(theId);
         theModel.addAttribute(theRoom);
         theModel.addAttribute("hotelId", Id);
-        return "rooms/room-form";
+        return roomForm;
     }
 
     @GetMapping("/deleteById")
-    public String deleteRoom(@RequestParam("roomId") int theId,@RequestParam("hotelId") int Id ){
+    public String deleteRoom(@RequestParam("roomId") int theId,@RequestParam("hotelId") int Id){
         roomService.deleteById(theId);
         return "redirect:/rooms/findRooms?hotelId="+Id;
     }

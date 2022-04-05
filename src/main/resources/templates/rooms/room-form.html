@@ -18,9 +18,15 @@
     <form action="#" th:action="@{/rooms/save/{Id}(Id=${hotelId})}"  th:object="${room}" method="POST">
 
         <input type="hidden" th:field="*{roomId}"/>
+        <div>
+            <input type="text" th:field="*{roomNo}" id="roomNo" class="form-control mb-4 col-4" style="display:inline" placeholder="Room No"/><br>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('roomNo')}" th:errors="*{roomNo}"></div>
+        </div>
+        <div>
+            <input type="text" th:field="*{floorNo}" id="floorNo" class="form-control mb-4 col-4" style="display:inline"  placeholder="Floor No"/><br>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('floorNo')}" th:errors="*{floorNo}"></div>
+        </div>
 
-        <input type="text" th:field="*{roomNo}" class="form-control mb-4 col-4" style="display:inline" placeholder="Room No"/><br>
-        <input type="text" th:field="*{floorNo}" class="form-control mb-4 col-4" style="display:inline"  placeholder="Floor No"/><br>
 
         <button type="submit" class="btn btn-info col-2">Save Room</button>
     </form>

@@ -1,5 +1,6 @@
 package com.springboot.hotelmanagement.service;
 
+
 import com.springboot.hotelmanagement.entity.Room;
 import com.springboot.hotelmanagement.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,9 @@ import java.util.Optional;
 @Repository
 public class RoomServiceImpl implements RoomService{
 
+    @Autowired
     private RoomRepository roomRepository;
 
-    @Autowired
-    public RoomServiceImpl(RoomRepository theRoomRepository){
-        roomRepository=theRoomRepository;
-    }
 
     @Override
     @Transactional
@@ -55,4 +53,5 @@ public class RoomServiceImpl implements RoomService{
     public List<Room> findRooms(int theId) {
         return roomRepository.findRooms(theId);
     }
+
 }

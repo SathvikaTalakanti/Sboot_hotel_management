@@ -12,12 +12,10 @@ import java.util.Optional;
 @Repository
 public class CustomerServiceImpl implements CustomerService{
 
+    @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    public CustomerServiceImpl(CustomerRepository theCustomerRepository){
-        customerRepository=theCustomerRepository;
-    }
+
 
     @Override
     @Transactional
@@ -56,4 +54,6 @@ public class CustomerServiceImpl implements CustomerService{
     public List<Customer> findCustomers(int theId) {
         return customerRepository.findCustomers(theId);
     }
+
+
 }

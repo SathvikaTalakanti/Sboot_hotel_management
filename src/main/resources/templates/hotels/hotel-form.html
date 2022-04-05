@@ -19,11 +19,21 @@
 
         <!--This field is very important for updating in tables-->
         <input type="hidden" th:field="*{hotelId}"/>
+        <div>
+            <input type="text" th:field="*{hotelName}" id="hotelName" class="form-control mb-4 col-4"  placeholder="Hotel Name"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('hotelName')}" th:errors="*{hotelName}"></div>
 
-        <input type="text" th:field="*{hotelName}" class="form-control mb-4 col-4"  placeholder="Hotel Name"/>
-        <input type="text" th:field="*{hotelAddress}" class="form-control mb-4 col-4" placeholder="Hotel Address"/>
-        <input type="text" th:field="*{hotelRating}" class="form-control mb-4 col-4" placeholder="Hotel Rating"/>
+        </div>
+        <div>
+            <input type="text" th:field="*{hotelAddress}" id="hotelAddress" class="form-control mb-4 col-4" placeholder="Hotel Address"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('hotelAddress')}" th:errors="*{hotelAddress}"></div>
 
+        </div>
+        <div>
+            <input type="text" th:field="*{hotelRating}" id="hotelRating" class="form-control mb-4 col-4" placeholder="Hotel Rating"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('hotelRating')}" th:errors="*{hotelRating}"></div>
+
+        </div>
         <button type="submit" class="btn btn-info col-2">Save Hotel</button>
 
     </form>
